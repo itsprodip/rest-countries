@@ -4,7 +4,9 @@ import './App.css'
 import Countries from './Components/Countries'
 function App() {
   const fetchCountry=async()=>{
-    const res = await fetch("https://restcountries.com/v3.1/all?fields=name");
+    const res = await fetch(
+      "https://restcountries.com/v3.1/all?fields=name,capital,flags"
+    );
     return res.json();
   }
 const countryPromise=fetchCountry();
@@ -18,7 +20,9 @@ const countryPromise=fetchCountry();
             </h1>
           }
         >
-          <Countries countryPromise={countryPromise}></Countries>
+          <div className='w-11/12 mx-auto'>
+            <Countries countryPromise={countryPromise}></Countries>
+          </div>
         </Suspense>
       </div>
     </>
