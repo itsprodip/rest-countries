@@ -4,29 +4,23 @@ const Country = ({ country }) => {
   const { name } = country;
   const { common } = name;
   const {flags}=country;
-  console.log(flags);
+ 
   return (
     <div className="">
-      
       <div className="card bg-base-100  space-y-3 shadow-sm">
         <figure>
-          <img className="object-cover p-5 h-50"
-            src={flags.png}
-            alt="flags"
-          />
+          <img className="object-cover p-5 h-50" src={flags.png} alt="flags" />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title">
-            {common}
-            <div className="badge badge-secondary">NEW</div>
-          </h2>
-          <p>
-            A card component has a figure, a body part, and inside body there
-            are title and actions parts
-          </p>
+        <div className="card-body ml-3">
+          <h2 className="card-title text-xl font-bold">{common}</h2>
+          <p></p>
           <div className="card-actions justify-end">
-            <div className="badge badge-outline">Fashion</div>
-            <div className="badge badge-outline">Products</div>
+            <div className="badge badge-outline text-sm text-gray-600">
+              Capital: {country.capital}
+            </div>
+            <div className="badge badge-outline">
+              <button className="btn btn-active">Default</button>
+            </div>
           </div>
         </div>
       </div>
