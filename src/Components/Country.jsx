@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Country = ({ country }) => {
   const { name } = country;
   const { common } = name;
-  const {flags}=country;
- 
+  const { flags } = country;
+  const [visited, setVisited] = useState(false);
+  const visitBtn = () => {
+    if(!visited)
+    setVisited(true);
+  else setVisited(false);
+  };
   return (
-    <div className="">
+    <div className={`${visited && 'bg-gray-400'}`}>
       <div className="card bg-base-100  space-y-3 shadow-sm">
         <figure>
           <img className="object-cover p-5 h-50" src={flags.png} alt="flags" />
@@ -18,9 +23,12 @@ const Country = ({ country }) => {
             <div className="badge badge-outline text-sm text-gray-600">
               Capital: {country.capital}
             </div>
-            <div className="badge badge-outline">
-              <button className="btn btn-active">Default</button>
-            </div>
+            <button
+              onClick={() => visitBtn()}
+              className="px-2 py-1 m-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer"
+            >
+              {visited ? "Visited" : "Not Visited"}
+            </button>
           </div>
         </div>
       </div>
