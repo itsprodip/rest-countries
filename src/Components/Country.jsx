@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 
-const Country = ({ country, handleClick, handleCountryClick }) => {
+const Country = ({
+  country,
+
+  handleVisitedFlag,
+  handleUnvisitedFlag,
+}) => {
   const { name } = country;
   const { common } = name;
   const { flags } = country;
-  // console.log('kala',handleVisitedCountries);
-
+  //  console.log(handleVisitedFlag);
   const [visited, setVisited] = useState(false);
-
+  const handleVisited = (visited) => {
+    handleUnvisitedFlag(common);
+    if (visited) {
+      setVisited(!visited);
+    } else {
+      setVisited(!visited);
+      handleVisitedFlag(common);
+    }
+  };
   return (
     <div className={`${visited && "bg-gray-400"}`}>
       <div className="card bg-base-100  space-y-3 shadow-sm">
@@ -23,15 +35,12 @@ const Country = ({ country, handleClick, handleCountryClick }) => {
             </div>
             <button
               onClick={() => {
-                setVisited(!visited);
-                handleClick(visited);
+                handleVisited(visited);
               }}
               className="px-2 py-1 m-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer"
             >
               {visited ? "Visited" : "Not Visited"}
             </button>
-
-            <button onClick={handleCountryClick}>Button</button>
           </div>
         </div>
       </div>

@@ -3,39 +3,40 @@ import Country from "./Country";
 const Countries = ({ countryPromise }) => {
   const countries = use(countryPromise);
 
-  const [countCountries, setCountCountries] = useState(0);
-  const [visitedCountries, setVisitedCountries] = useState([]);
+  let [visitedFlag, setVisitedFlag] = useState([]);
 
-  const handleCountryClick = () => {
-    console.log("btn clicked to be added");
-    // console.log(country);
+  const handleVisitedFlag = (country) => {
+    const newVisitedFlag = [country, ...visitedFlag];
+    setVisitedFlag(newVisitedFlag);
+  };
+  const handleUnvisitedFlag = (country) => {
+    visitedFlag = visitedFlag.filter((item) => item !== country);
+    const newVisitedFlag = [...visitedFlag];
+    setVisitedFlag(newVisitedFlag);
   };
 
-
-// console.log(handleCountryClick());
-  const handleClick = (visited) => {
-    if (!visited) {
-      setCountCountries(countCountries + 1);
-    } else {
-      setCountCountries(countCountries - 1);
-    }
-  };
   return (
     <div>
       <h1 className="text-4xl font-bold text-green-500 text-center py-10">
         Here rest countries
       </h1>
+
       <h1 className="text-2xl font-bold text-green-500 text-center">
-        Travelling countries: {countCountries}
+        Visited Flags: {visitedFlag.length}
       </h1>
+      <ol>
+        {visitedFlag.map((countryFlag) => (
+          <li>{countryFlag}</li>
+        ))}
+      </ol>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         {countries.map((country) => (
           <Country
             key={country.name.common}
             country={country}
-            handleClick={handleClick}
-            handleCountryClick={handleCountryClick}
+            handleVisitedFlag={handleVisitedFlag}
+            handleUnvisitedFlag={handleUnvisitedFlag}
           ></Country>
         ))}
       </div>
